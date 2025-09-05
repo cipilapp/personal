@@ -45,6 +45,5 @@ datos = {
 }
 
 
-#salida = mt.motor_izaje(datos)
-#st.write("Grua {salida['modelo_grua']}")
-#st.write(salida["modelo_grua"])
+salida = mt.motor_izaje(datos)
+st.write(salida["modelo_grua"])
