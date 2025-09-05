@@ -35,14 +35,14 @@ st.dataframe(filtered_df)
 st.write(f"### Statistics for {feature}")
 st.write(filtered_df[feature].describe())
 
-#datos = {
-#    "peso_carga_kg": 20000,
-#    "largo_carga_m": 12,
-#    "forma_carga": "cilindro",
-#    "angulo_slingas_deg": 45,
-#    "distancia_horizontal_m": 12,
-#    "altura_izaje_m": 6
-#}
+datos = {
+    "peso_carga_kg": 20000,
+    "largo_carga_m": 12,
+    "forma_carga": "cilindro",
+    "angulo_slingas_deg": 45,
+    "distancia_horizontal_m": 12,
+    "altura_izaje_m": 6
+}
 
 
 #salida = mt.motor_izaje(datos)
