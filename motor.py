@@ -16,6 +16,7 @@ def motor_izaje(datos):
     # Reglas de inferencia
     spreader = "Sí" if largo > 6 or forma in ["cilíndrica", "tanque"] else "No"
 
+    # tipo de grua
     if peso <= 35000 and pluma_requerida <= 30:
         modelo = "GR-350XL Tadano"
     elif peso <= 50000 and pluma_requerida <= 38:

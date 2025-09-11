@@ -1,0 +1,35 @@
+/*# --- Estilos personalizados ---
+*/
+        .main {
+            background-color: #f4f6f8;
+        }
+        .company-header {
+            background-color: #003366;
+            color: #fff;
+            padding: 2rem 1rem 1rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .company-logo {
+            width: 180px;
+            margin-bottom: 1rem;
+        }
+        .company-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .company-desc {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .stButton>button {
+            background-color: #003366;
+            color: #fff;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .stTable {
+            background-color: #fff;
+            border-radius: 8px;
+        }

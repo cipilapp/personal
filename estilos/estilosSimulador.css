@@ -1,0 +1,39 @@
+/* estilosSimulador.css */
+        div[data-testid="stForm"]:nth-of-type(1) {
+            background-color: #e6f0fa;
+            padding: 2rem 2rem 1rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #b3c6e0;
+        }
+/*div[data-testid="stForm"]:nth-of-type(1) {
+   background-color: #e6f0fa;
+    border: 2px solid #003366;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}*/
+div[data-testid="stForm"]:nth-of-type(2) {
+    background-color: #fffbe6;
+    border: 2px solid #ffcc00;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+[data-testid="stTable"] {
+    width: 100% !important;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.stNumberInput, .stSelectbox, .stTextInput {
+    width: 100% !important;
+    max-width: 600px;
+}
+.stButton>button {
+    background-color: #007acc;
+    color: white;
+    border-radius: 8px;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+}
