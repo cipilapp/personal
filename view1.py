@@ -1,21 +1,41 @@
+"""
+view1.py
+--------
+Vista principal del Simulador Logístico de Grúas.
+
+Este archivo implementa la interfaz de usuario usando Streamlit, permitiendo al usuario ingresar los datos del plan de izaje y visualizar la recomendación de grúa. 
+Incluye carga de estilos personalizados, validación de datos y presentación de resultados.
+
+Estructura:
+- Carga de estilos CSS y logo de la empresa.
+- Formulario de ingreso de datos técnicos del izaje.
+- Validación de campos y presentación de errores.
+- Llamado al controlador para obtener la recomendación.
+- Visualización de resultados en tabla.
+
+Autor: Ing. Elkin Moreno
+Fecha: 12 Sept 2025
+Versión: 0.1
+"""
+
 import streamlit as st
 import pandas as pd
 import re
 from controller import GruaController
 
+# Instancia del controlador principal
 controller = GruaController()
 
-# Cargar estilos de la pagina base
+# --- Carga de estilos personalizados ---
+# Carga y aplica los estilos CSS desde archivos externos para personalizar la apariencia de la app.
 with open("estilos/estilosSimulador.css") as formStyles:
     st.markdown(f"<style>{formStyles.read()}</style>", unsafe_allow_html=True)
 
-# Cargar estilos desde el archivo externo
 with open("estilos/mainStyles.css") as mainStyles:
     st.markdown(f"<style>{mainStyles.read()}</style>", unsafe_allow_html=True)
 
-
 # --- Encabezado de empresa ---
-# Muestra el logo con st.image
+# Muestra el logo y la información de la empresa en la parte superior de la app.
 st.image("img/logo.jpg", width=180)
 
 st.markdown("""
@@ -29,17 +49,17 @@ st.markdown("""
     </div>            
 """, unsafe_allow_html=True)
 
-# CSS personalizado
-
+# --- Formulario de ejemplo (puedes eliminarlo si no lo usas) ---
 with st.form("mi_formulario"):
     st.text_input("Campo de ejemplo")
     st.number_input("Otro campo")
     st.form_submit_button("Enviar")
-    
 
+# --- Formulario principal de Plan de Izaje ---
 st.title("Formulario de Plan de Izaje")
 
 with st.form("izaje_form"):
+    # Campos de entrada para los datos técnicos del izaje
     peso_carga = st.number_input("Peso de carga (kg)", min_value=0, key="pesoCarga")
     largo_carga = st.number_input("Largo de carga (m)", min_value=0.0, step=0.1, key="largoCarga")
     forma_carga = st.selectbox("Forma de carga", ["cilindro", "rectangular", "otro"], key="formaCarga")
@@ -50,7 +70,7 @@ with st.form("izaje_form"):
 
 if submitted:
     errores = []
-    # Validar campo_num: solo dígitos y rango entre 1 y 1,000,000
+    # Validación del campo peso_carga: obligatorio, solo dígitos, rango válido
     if not peso_carga:
         errores.append("El campo numérico es obligatorio.")
     elif not re.match(r"^\d+$", str(peso_carga)):
@@ -60,10 +80,12 @@ if submitted:
         if not (1 <= valor_num <= 1000000):
             errores.append("El campo numérico debe ser un número entero entre 1 y 1,000,000.")
 
+    # Muestra los errores encontrados en la validación
     if errores:
         for err in errores:
             st.error(err)
     else:
+        # Si no hay errores, prepara los datos para el controlador
         datos = {
             "peso_carga_kg": peso_carga,
             "largo_carga_m": largo_carga,
@@ -74,7 +96,9 @@ if submitted:
         }
         st.success("Formulario enviado correctamente.")
 
-    resultado = controller.recomendar_grua(datos)
-    st.write("### Plan de Izaje")
-    #st.json(resultado)
-    st.table(pd.DataFrame([resultado]))
+        # Llama al controlador para obtener la recomendación de grúa
+        resultado = controller.recomendar_grua(datos)
+
+        # Presenta el resultado en una tabla
+        st.write("### Plan de Izaje")
+        st.table(pd.DataFrame([resultado]))
