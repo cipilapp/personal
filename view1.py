@@ -1,13 +1,9 @@
 import streamlit as st
 import pandas as pd
-from motor import motor_izaje
-import motorAvanzado as motoravanzado
 import re
-from config.config_db import DB_PARAMS
-from dao.grua_dao import GruaDAO
+from controller import GruaController
 
-#llamada a la instancia de la base de datos
-dao = GruaDAO(DB_PARAMS)
+controller = GruaController()
 
 # Cargar estilos de la pagina base
 with open("estilos/estilosSimulador.css") as formStyles:
@@ -78,7 +74,7 @@ if submitted:
         }
         st.success("Formulario enviado correctamente.")
 
-    resultado = motor_izaje(datos, grua_dao=dao)
-    #resultado = motoravanzado.motor_izaje(datos)
+    resultado = controller.recomendar_grua(datos)
     st.write("### Plan de Izaje")
+    #st.json(resultado)
     st.table(pd.DataFrame([resultado]))

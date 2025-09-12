@@ -1,6 +1,6 @@
 import math
 
-def motor_izaje(datos):
+def motor_izaje(datos, gruas):
     # Variables
     peso = datos["peso_carga_kg"]
     largo = datos["largo_carga_m"]
@@ -16,15 +16,12 @@ def motor_izaje(datos):
     # Reglas de inferencia
     spreader = "Sí" if largo > 6 or forma in ["cilíndrica", "tanque"] else "No"
 
-    # tipo de grua
-    if peso <= 35000 and pluma_requerida <= 30:
-        modelo = "GR-350XL Tadano"
-    elif peso <= 50000 and pluma_requerida <= 38:
-        modelo = "GMK 3050 Grove"
-    elif peso <= 100000 and pluma_requerida <= 52:
-        modelo = "LTM 1100 Liebherr"
-    else:
-        modelo = "Consulta especializada requerida"
+    # Selección de grúa
+    modelo = "Consulta especializada requerida"
+    for grua in gruas:
+        if peso <= grua["capacidad_kg"] and pluma_requerida <= grua["pluma_max_m"]:
+            modelo = grua["modelo"]
+            break
 
     return {
         "modelo_grua": modelo,
